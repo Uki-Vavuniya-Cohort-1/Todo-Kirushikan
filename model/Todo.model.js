@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const User = require("./user.model");
+
 const TodoSchema = new mongoose.Schema({
     todo_id: {
         type: String,
@@ -10,7 +12,8 @@ const TodoSchema = new mongoose.Schema({
         required: true
     },
     created_by: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     created_date: {
@@ -32,7 +35,7 @@ const TodoSchema = new mongoose.Schema({
         enum: ["finished", "progress", "good to go"],
         default: "progress"
     }
-},);
+});
 
 const Todo = mongoose.model("Todo", TodoSchema);
 
